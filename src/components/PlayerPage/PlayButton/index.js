@@ -5,26 +5,30 @@ import pause from '../../../img/pause.png'
 import './style.sass'
 import classnames from 'classnames'
 
-const PlayButton = ({ isPlaying = false }) => {
+const PlayButton = ({ isPlaying, handlePlayClick, videoRef }) => {
   //Change class according if the video is playing or not
-  const buttonClasses = classnames("button",{
-    'button--play': !isPlaying,
-    'button--pause': isPlaying
+  const buttonClasses = classnames("button", {
+    'button--play': isPlaying,
+    'button--pause': !isPlaying
   })
 
   return (
-    <div className="button__wrapper">
+    <div className="button__wrapper"
+      onClick={() => handlePlayClick(videoRef)}
+    >
       <img
-        className= {buttonClasses}
-        src={isPlaying ? pause : play} 
-        alt="play button" 
-        />
+        className={buttonClasses}
+        src={isPlaying ? pause : play}
+        alt="play button"
+      />
     </div>
   );
 }
 
 PlayButton.propTypes = {
-  isPlaying: PropTypes.string
+  isPlaying: PropTypes.bool.isRequired,
+  handlePlayClick: PropTypes.func.isRequired,
+  videoRef: PropTypes.object.isRequired,
 }
 
 export default PlayButton;

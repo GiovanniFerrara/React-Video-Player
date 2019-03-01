@@ -1,0 +1,14 @@
+[
+  {
+    "time": 33,
+    "note": "This is the most important moment of the video"
+  },
+  {
+    "time": 200,
+    "note": "This is the worst moment"
+  },
+  {
+    "time": 500,
+    "note": "This is the worst moment"
+  }
+]
