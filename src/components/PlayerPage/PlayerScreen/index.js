@@ -1,15 +1,15 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './style.sass';
 import PlayButton from '../PlayButton';
 import classnames from 'classnames';
 import Spinner from '../../commons/Spinner'
 
-const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, isLoading }) => {
 
+const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading }) => {
+
+  // use refs to get the video control
   const videoRef = useRef(null);
-
-  // const play = () => { videoRef.current.play() };
 
   // Chose the classNames and load the spinner if loading
   const videoWrapperClassNames = classnames({
@@ -31,7 +31,9 @@ const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, isLoading }) => {
         <>
           <video
             className={videoClassNames}
-            onClick={() => handlePlayClick(videoRef)}
+            onLoadedData={(e) => { getVideoInfo(e.target) }}
+            onTimeUpdate={(e) => { getVideoInfo(e.target) }}
+            onClick={(e) => handlePlayClick(videoRef)}
             ref={videoRef}
             src={videoSrc}
           >
@@ -52,6 +54,7 @@ PlayerScreen.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   handlePlayClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  getVideoInfo: PropTypes.func.isRequired,
 }
 
 export default PlayerScreen;

@@ -20,9 +20,20 @@ class PlayerPage extends Component {
     // bind methods
     this.fetchVideo = this.fetchVideo.bind(this);
     this.handlePlayClick = this.handlePlayClick.bind(this);
+    this.getVideoInfo = this.getVideoInfo.bind(this);
   }
   componentDidMount() {
     this.fetchVideo(videoID)
+  }
+
+  getVideoInfo(videoInfo) {
+    if (videoInfo) {
+      const { duration, currentTime } = videoInfo;
+      this.setState({
+        duration,
+        currentTime,
+      })
+    }
   }
 
   handlePlayClick(item) {
@@ -53,7 +64,10 @@ class PlayerPage extends Component {
     return (
       <>
         <div className="container">
-          <PlayerScreen {...this.state} handlePlayClick={this.handlePlayClick} />
+          <PlayerScreen {...this.state}
+            handlePlayClick={this.handlePlayClick}
+            getVideoInfo={this.getVideoInfo}
+          />
         </div>
       </>
     )
