@@ -4,9 +4,9 @@ import './style.sass';
 import PlayButton from '../PlayButton';
 import classnames from 'classnames';
 import Spinner from '../../commons/Spinner'
+import TimeLine from './../../TimeLine'
 
-
-const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading }) => {
+const Screen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading, onLoadedData }) => {
 
   // use refs to get the video control
   const videoRef = useRef(null);
@@ -31,7 +31,7 @@ const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLo
         <>
           <video
             className={videoClassNames}
-            onLoadedData={(e) => { getVideoInfo(e.target) }}
+            onLoadedData={(e) => { onLoadedData(e.target) }}
             onTimeUpdate={(e) => { getVideoInfo(e.target) }}
             onClick={(e) => handlePlayClick(videoRef)}
             ref={videoRef}
@@ -39,6 +39,7 @@ const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLo
           >
           </video>
           <PlayButton handlePlayClick={handlePlayClick} isPlaying={isPlaying} videoRef={videoRef} />
+          <TimeLine />
         </>
       ) : (
           <Spinner />
@@ -49,12 +50,13 @@ const PlayerScreen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLo
   );
 }
 
-PlayerScreen.propTypes = {
+Screen.propTypes = {
   videoSrc: PropTypes.string.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   handlePlayClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   getVideoInfo: PropTypes.func.isRequired,
+  onLoadedData: PropTypes.func.isRequired,
 }
 
-export default PlayerScreen;
+export default Screen;

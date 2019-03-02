@@ -2,6 +2,6 @@
 
 export const _fetch = (url) => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(url), 2000)
+    setTimeout(() => resolve(url), 500)
   })
 }
