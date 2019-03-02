@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import './style.sass';
 import HotSpot from './HotSpot';
+import CardItem from './CardItem';
 
 const CardPreview = ({ time, note, duration, handleHotspotClick }) => {
 
@@ -10,6 +11,11 @@ const CardPreview = ({ time, note, duration, handleHotspotClick }) => {
       <HotSpot
         time={time}
         handleHotspotClick={handleHotspotClick}
+        duration={duration}
+      />
+      <CardItem
+        note={note}
+        time={time}
         duration={duration}
       />
     </div>

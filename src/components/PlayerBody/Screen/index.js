@@ -58,7 +58,6 @@ const Screen = ({
               duration={duration}
               handleTimeLineClick={handleTimeLineClick}
               hotSpots={hotSpots}
-              duration={duration}
               handleHotspotClick={handleHotspotClick}
             />
 

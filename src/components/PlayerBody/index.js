@@ -5,7 +5,7 @@ import { _fetch } from '../../utils/mock/functions.js'
 import videoID from '../../utils/data/createAVideoPlayer.mp4'
 import { queryString } from '../../utils/functions'
 
-class PlayerPage extends Component {
+class PlayerBody extends Component {
   constructor(props) {
     super(props)
     // APPLICATION STATE
@@ -37,7 +37,9 @@ class PlayerPage extends Component {
     this.getCurrentTimeFromUrl() && this.setStartingTime(this.getCurrentTimeFromUrl());
 
     // TODO fetch hotspots by the API
-    this.state.hotSpots = hotSpots;
+    this.setState({
+      hotSpots
+    })
   }
   // Hook - Callback that is called once the the player has loaded
   onLoadedData(videoElement) {
@@ -142,6 +144,7 @@ class PlayerPage extends Component {
     // avod interaction with click on timeline and bookmark
     e.stopPropagation()
     this.skipToTime(time)
+    this.props.history.push(`/?time=${time}`)
   }
 
   render() {
@@ -161,4 +164,4 @@ class PlayerPage extends Component {
   }
 }
 
-export default PlayerPage
+export default PlayerBody
