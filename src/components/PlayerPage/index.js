@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Screen from './Screen'
-import fakeData from '../../utils/seed/hotspots.json'
+import hotSpots from '../../utils/seed/hotspots.json'
 import { _fetch } from '../../utils/mock/functions.js'
 import videoID from '../../utils/data/createAVideoPlayer.mp4'
 import { queryString } from '../../utils/functions'
@@ -17,7 +17,7 @@ class PlayerPage extends Component {
       isPlaying: false,
       isVideoMount: false,
       videoSrc: "",
-      hotspots: [],
+      hotSpots: [],
       error: {},
     }
     // bind methods
@@ -29,11 +29,15 @@ class PlayerPage extends Component {
     this.setStartingTime = this.setStartingTime.bind(this);
     this.onLoadedData = this.onLoadedData.bind(this);
     this.handleTimeLineClick = this.handleTimeLineClick.bind(this);
+    this.handleHotspotClick = this.handleHotspotClick.bind(this);
   }
   componentDidMount() {
     console.log("componentDidMount")
     this.fetchVideo(videoID);
     this.getCurrentTimeFromUrl() && this.setStartingTime(this.getCurrentTimeFromUrl());
+
+    // TODO fetch hotspots by the API
+    this.state.hotSpots = hotSpots;
   }
   // Hook - Callback that is called once the the player has loaded
   onLoadedData(videoElement) {
@@ -45,7 +49,7 @@ class PlayerPage extends Component {
     this.skipToTime(this.state.startingTime);
   }
 
-  // save in the state the video info like actual current time and gets the duration of the video
+  // save in the state the video duration and the current time of reproduction, taking the data from the video ref
   getVideoInfo(videoElement) {
     console.log("call getVideoInfo")
     if (videoElement) {
@@ -86,7 +90,7 @@ class PlayerPage extends Component {
   // set the the starting time in the state
   setStartingTime(time) {
     console.log("call setStartingTime")
-
+    //time param is required
     if (time === null) return 0;
     this.setState({
       startingTime: parseInt(time)
@@ -108,7 +112,7 @@ class PlayerPage extends Component {
   // Fetch the fake video data
   async fetchVideo(url) {
     console.log("call fetchVideo")
-
+    // call the moked version of the fetch API
     const videoSrc = await _fetch(url)
     if (!videoSrc) {
       return this.setState({
@@ -125,12 +129,19 @@ class PlayerPage extends Component {
   // Hande the click on the timeline bar
 
   handleTimeLineClick(e) {
+    // avod interaction with click on timeline and bookmark
+    e.stopPropagation()
     const actualRate = e.nativeEvent.offsetX;
     const screenWidth = e.currentTarget.clientWidth;
     const duration = this.state.duration;
     const rateToTime = actualRate * duration / screenWidth;
     this.skipToTime(rateToTime)
-    console.log(actualRate, screenWidth, duration, rateToTime)
+  }
+
+  handleHotspotClick(e, time) {
+    // avod interaction with click on timeline and bookmark
+    e.stopPropagation()
+    this.skipToTime(time)
   }
 
   render() {
@@ -142,6 +153,7 @@ class PlayerPage extends Component {
             getVideoInfo={this.getVideoInfo}
             onLoadedData={this.onLoadedData}
             handleTimeLineClick={this.handleTimeLineClick}
+            handleHotspotClick={this.handleHotspotClick}
           />
         </div>
       </>

@@ -6,7 +6,20 @@ import classnames from 'classnames';
 import Spinner from '../../commons/Spinner'
 import TimeLine from './../../TimeLine'
 
-const Screen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading, onLoadedData, currentTime, duration, handleTimeLineClick }) => {
+const Screen = ({
+  videoSrc,
+  isPlaying,
+  handlePlayClick,
+  getVideoInfo,
+  isLoading,
+  onLoadedData,
+  currentTime,
+  duration,
+  handleTimeLineClick,
+  hotSpots,
+  handleHotspotClick
+}
+) => {
 
   // use refs to get the video control
   const videoRef = useRef(null);
@@ -43,7 +56,12 @@ const Screen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading,
             <TimeLine
               currentTime={currentTime}
               duration={duration}
-              handleTimeLineClick={handleTimeLineClick} />
+              handleTimeLineClick={handleTimeLineClick}
+              hotSpots={hotSpots}
+              duration={duration}
+              handleHotspotClick={handleHotspotClick}
+            />
+
           </div>
         </>
       ) : (
@@ -57,12 +75,14 @@ const Screen = ({ videoSrc, isPlaying, handlePlayClick, getVideoInfo, isLoading,
 
 Screen.propTypes = {
   videoSrc: PropTypes.string.isRequired,
+  hotSpots: PropTypes.array.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   handlePlayClick: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   getVideoInfo: PropTypes.func.isRequired,
   onLoadedData: PropTypes.func.isRequired,
   handleTimeLineClick: PropTypes.func.isRequired,
+
 }
 
 export default Screen;
