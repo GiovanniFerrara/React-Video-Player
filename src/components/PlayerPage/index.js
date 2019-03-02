@@ -28,6 +28,7 @@ class PlayerPage extends Component {
     this.skipToTime = this.skipToTime.bind(this);
     this.setStartingTime = this.setStartingTime.bind(this);
     this.onLoadedData = this.onLoadedData.bind(this);
+    this.handleTimeLineClick = this.handleTimeLineClick.bind(this);
   }
   componentDidMount() {
     console.log("componentDidMount")
@@ -121,6 +122,17 @@ class PlayerPage extends Component {
     })
   }
 
+  // Hande the click on the timeline bar
+
+  handleTimeLineClick(e) {
+    const actualRate = e.nativeEvent.offsetX;
+    const screenWidth = e.currentTarget.clientWidth;
+    const duration = this.state.duration;
+    const rateToTime = actualRate * duration / screenWidth;
+    this.skipToTime(rateToTime)
+    console.log(actualRate, screenWidth, duration, rateToTime)
+  }
+
   render() {
     return (
       <>
@@ -129,6 +141,7 @@ class PlayerPage extends Component {
             handlePlayClick={this.handlePlayClick}
             getVideoInfo={this.getVideoInfo}
             onLoadedData={this.onLoadedData}
+            handleTimeLineClick={this.handleTimeLineClick}
           />
         </div>
       </>
