@@ -11,8 +11,11 @@ const CardItem = ({ note, time, duration, canvasRef }) => {
 
   let leftPosition = 100 * time / duration;
   //dont position over 90% left
-  if (leftPosition > 90) {
-    leftPosition = 85
+  let borderBottomLeftRadius = 0;
+
+  if (leftPosition > 70) {
+    leftPosition = 70
+    borderBottomLeftRadius = 5;
   }
   return (
     <div
@@ -20,7 +23,7 @@ const CardItem = ({ note, time, duration, canvasRef }) => {
       className="card-item"
       style={{
         "left": leftPosition + "%",
-
+        borderBottomLeftRadius,
       }}
     >
       <Thumbnail canvasRef={canvasRef} />

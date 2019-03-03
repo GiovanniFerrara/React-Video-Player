@@ -28,7 +28,6 @@ class CardPreview extends Component {
     console.log("call generateThumnail")
     const canvas = this.canvasRef.current;
     canvas.getContext('2d').drawImage(this.videoRef.current, 0, 0, 300, 150);
-    debugger
   }
   render() {
     const { time, note, duration, handleHotspotClick } = this.props
