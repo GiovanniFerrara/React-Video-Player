@@ -3,9 +3,9 @@ import Screen from './Screen'
 import hotSpots from '../../utils/seed/hotspots.json'
 import { _fetch } from '../../utils/mock/functions.js'
 import { queryString } from '../../utils/functions'
-
+import videoLocal from '../../utils/data/video.mp4'
 // seed SRC with a default link
-const videoID = `https://r4---sn-f5f7ln7e.googlevideo.com/videoplayback?ei=RN17XNjbBNDugQfCjZmgBQ&id=o-AG8P3-ift4WWBuDZI6AztAoPgrn03k3HfWEkk85v2R2F&dur=201.897&source=youtube&pl=13&key=cms1&ip=178.162.205.110&sparams=clen,dur,ei,expire,gir,id,ip,ipbits,itag,lmt,mime,mip,mm,mn,ms,mv,pl,ratebypass,requiressl,source&itag=18&fvip=1&expire=1551643044&clen=15230131&requiressl=yes&mime=video%2Fmp4&lmt=1417137686842638&ratebypass=yes&ipbits=0&gir=yes&c=WEB&signature=21C09863AE2CDD36F248AFDE0C7A3F6A72836B6D.4CDA12D0C9B96D94FA25C6F17A3E2233F5F69594&title=Hire_Me_-_Dr_Syntax&cms_redirect=yes&mip=89.65.241.31&mm=31&mn=sn-f5f7ln7e&ms=au&mt=1551621377&mv=m`
+const videoID = videoLocal;
 
 class PlayerBody extends Component {
   constructor(props) {
