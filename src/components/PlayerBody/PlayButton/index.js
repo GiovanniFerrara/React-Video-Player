@@ -28,7 +28,7 @@ const PlayButton = ({ isPlaying, handlePlayClick, videoRef }) => {
 PlayButton.propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   handlePlayClick: PropTypes.func.isRequired,
-  videoRef: PropTypes.object.isRequired,
+  videoRef: PropTypes.object,
 }
 
 export default PlayButton;

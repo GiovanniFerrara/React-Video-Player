@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import './style.sass';
 import CardPreview from '../CardPreview'
 
-const TimeLine = ({ currentTime, duration, skipToTime, handleTimeLineClick, hotSpots, handleHotspotClick }) => {
+const TimeLine = ({ currentTime, duration, skipToTime, handleTimeLineClick, hotSpots, handleHotspotClick, videoElement }) => {
 
   const completionRate = 100 * currentTime / duration;
   return (
@@ -19,6 +19,8 @@ const TimeLine = ({ currentTime, duration, skipToTime, handleTimeLineClick, hotS
             note={hotspot.note}
             duration={duration}
             handleHotspotClick={handleHotspotClick}
+            videoElement={videoElement}
+            currentTime={currentTime}
           />
         )
       })}
@@ -36,6 +38,8 @@ export default TimeLine;
 TimeLine.propTypes = {
   currentTime: PropTypes.number.isRequired,
   duration: PropTypes.number.isRequired,
+  currentTime: PropTypes.number.isRequired,
   handleTimeLineClick: PropTypes.func.isRequired,
   hotSpots: PropTypes.array.isRequired,
+  videoElement: PropTypes.object,
 }

@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import './style.sass';
 import PlayButton from '../PlayButton';
 import classnames from 'classnames';
 import Spinner from '../../commons/Spinner'
 import TimeLine from './../../TimeLine'
-
+import Video from '../../Video'
 const Screen = ({
   videoSrc,
   isPlaying,
@@ -17,12 +17,10 @@ const Screen = ({
   duration,
   handleTimeLineClick,
   hotSpots,
-  handleHotspotClick
+  handleHotspotClick,
+  videoElement
 }
 ) => {
-
-  // use refs to get the video control
-  const videoRef = useRef(null);
 
   // Chose the classNames and load the spinner if loading
   const videoWrapperClassNames = classnames({
@@ -42,16 +40,15 @@ const Screen = ({
     <div className={videoWrapperClassNames}>
       {!isLoading ? (
         <>
-          <video
-            className={videoClassNames}
-            onLoadedData={(e) => { onLoadedData(e.target) }}
-            onTimeUpdate={(e) => { getVideoInfo(e.target) }}
-            onClick={(e) => handlePlayClick(videoRef)}
-            ref={videoRef}
-            src={videoSrc}
-          >
-          </video>
-          <PlayButton handlePlayClick={handlePlayClick} isPlaying={isPlaying} videoRef={videoRef} />
+          <Video
+            handlePlayClick={handlePlayClick}
+            onLoadedData={onLoadedData}
+            videoClassNames={videoClassNames}
+            videoSrc={videoSrc}
+            getVideoInfo={getVideoInfo}
+            videoElement={videoElement}
+          />
+          <PlayButton handlePlayClick={handlePlayClick} isPlaying={isPlaying} videoElement={videoElement} />
           <div className="controls">
             <TimeLine
               currentTime={currentTime}
@@ -59,6 +56,8 @@ const Screen = ({
               handleTimeLineClick={handleTimeLineClick}
               hotSpots={hotSpots}
               handleHotspotClick={handleHotspotClick}
+              videoElement={videoElement}
+              currentTime={currentTime}
             />
 
           </div>
@@ -81,7 +80,7 @@ Screen.propTypes = {
   getVideoInfo: PropTypes.func.isRequired,
   onLoadedData: PropTypes.func.isRequired,
   handleTimeLineClick: PropTypes.func.isRequired,
-
+  videoElement: PropTypes.object,
 }
 
 export default Screen;

@@ -6,8 +6,12 @@
   bottom: 20px
   border-radius: 15px
   opacity: 0
-  transition: opacity 0.3s ease-out
-
+  visibility: hidden
+  transition: 0.3s ease-out
 
 .hotspot:hover + .card-item
+  display: block
+  visibility: visible
   opacity: 1
+  z-index: 2
+

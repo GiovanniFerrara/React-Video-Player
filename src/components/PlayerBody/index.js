@@ -32,10 +32,11 @@ class PlayerBody extends Component {
     this.handleHotspotClick = this.handleHotspotClick.bind(this);
   }
   componentDidMount() {
+    //reference the video
+    this.videoElement = React.createRef()
     console.log("componentDidMount")
     this.fetchVideo(videoID);
     this.getCurrentTimeFromUrl() && this.setStartingTime(this.getCurrentTimeFromUrl());
-
     // TODO fetch hotspots by the API
     this.setState({
       hotSpots
@@ -43,7 +44,7 @@ class PlayerBody extends Component {
   }
   // Hook - Callback that is called once the the player has loaded
   onLoadedData(videoElement) {
-    this.videoElement = videoElement;
+
     this.setState({
       isVideoMount: true
     })
@@ -87,7 +88,7 @@ class PlayerBody extends Component {
         startingTime: 0,
       })
     }
-    this.videoElement.currentTime = time;
+    this.videoElement.current.currentTime = time;
   }
   // set the the starting time in the state
   setStartingTime(time) {
@@ -100,11 +101,10 @@ class PlayerBody extends Component {
   }
 
   //toggle isPlaying state, on play click
-  handlePlayClick(item) {
+  handlePlayClick() {
     console.log("call handlePlayClick")
-
-    if (!this.state.isPlaying) this.videoElement.play();
-    if (this.state.isPlaying) this.videoElement.pause();
+    if (!this.state.isPlaying) this.videoElement.current.play();
+    if (this.state.isPlaying) this.videoElement.current.pause();
     this.setState((prevState) => {
       return {
         isPlaying: !prevState.isPlaying
@@ -131,7 +131,7 @@ class PlayerBody extends Component {
   // Hande the click on the timeline bar
 
   handleTimeLineClick(e) {
-    // avod interaction with click on timeline and bookmark
+    // prevent interaction with click on timeline and bookmark
     e.stopPropagation()
     const actualRate = e.nativeEvent.offsetX;
     const screenWidth = e.currentTarget.clientWidth;
@@ -141,11 +141,14 @@ class PlayerBody extends Component {
   }
 
   handleHotspotClick(e, time) {
-    // avod interaction with click on timeline and bookmark
+    console.log("call handleHotspotClick")
+    // prevent interaction with click on timeline and bookmark
     e.stopPropagation()
     this.skipToTime(time)
     this.props.history.push(`/?time=${time}`)
+
   }
+
 
   render() {
     return (
@@ -157,6 +160,7 @@ class PlayerBody extends Component {
             onLoadedData={this.onLoadedData}
             handleTimeLineClick={this.handleTimeLineClick}
             handleHotspotClick={this.handleHotspotClick}
+            videoElement={this.videoElement}
           />
         </div>
       </>
