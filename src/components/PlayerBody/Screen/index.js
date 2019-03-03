@@ -58,6 +58,7 @@ const Screen = ({
               handleHotspotClick={handleHotspotClick}
               videoElement={videoElement}
               currentTime={currentTime}
+              videoSrc={videoSrc}
             />
 
           </div>

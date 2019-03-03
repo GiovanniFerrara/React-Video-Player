@@ -14,10 +14,8 @@ const HotSpot = ({ time, duration, handleHotspotClick, generateThumnail }) => {
       onFocus={(e) => generateThumnail()}
     >
       <img
-        onClick={(e) => {
-          handleHotspotClick(e, time)
-          generateThumnail()
-        }}
+        onClick={(e) => { handleHotspotClick(e, time) }}
+        onMouseOver={generateThumnail}
         className="hotspot__img"
         src={bookmark}
         alt="hotspot" />

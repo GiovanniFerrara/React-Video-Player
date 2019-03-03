@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import './style.sass'
 const Video = ({ videoElement, videoSrc, videoClassNames, onLoadedData, getVideoInfo, handlePlayClick }) => {
   return (
     <>
