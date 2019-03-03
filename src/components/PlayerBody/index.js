@@ -4,7 +4,7 @@ import hotSpots from '../../utils/seed/hotspots.json'
 import { _fetch } from '../../utils/mock/functions.js'
 import { queryString } from '../../utils/functions'
 
-
+// seed SRC with a default link
 const videoID = `https://r4---sn-f5f7ln7e.googlevideo.com/videoplayback?ei=RN17XNjbBNDugQfCjZmgBQ&id=o-AG8P3-ift4WWBuDZI6AztAoPgrn03k3HfWEkk85v2R2F&dur=201.897&source=youtube&pl=13&key=cms1&ip=178.162.205.110&sparams=clen,dur,ei,expire,gir,id,ip,ipbits,itag,lmt,mime,mip,mm,mn,ms,mv,pl,ratebypass,requiressl,source&itag=18&fvip=1&expire=1551643044&clen=15230131&requiressl=yes&mime=video%2Fmp4&lmt=1417137686842638&ratebypass=yes&ipbits=0&gir=yes&c=WEB&signature=21C09863AE2CDD36F248AFDE0C7A3F6A72836B6D.4CDA12D0C9B96D94FA25C6F17A3E2233F5F69594&title=Hire_Me_-_Dr_Syntax&cms_redirect=yes&mip=89.65.241.31&mm=31&mn=sn-f5f7ln7e&ms=au&mt=1551621377&mv=m`
 
 class PlayerBody extends Component {
@@ -32,6 +32,8 @@ class PlayerBody extends Component {
     this.onLoadedData = this.onLoadedData.bind(this);
     this.handleTimeLineClick = this.handleTimeLineClick.bind(this);
     this.handleHotspotClick = this.handleHotspotClick.bind(this);
+    this.addAsyncClassName = this.addAsyncClassName.bind(this);
+    this.removeAsyncClassName = this.removeAsyncClassName.bind(this);
   }
   componentDidMount() {
     //reference the video
@@ -76,14 +78,36 @@ class PlayerBody extends Component {
   // Deserialize the query string and return the time param
   getCurrentTimeFromUrl() {
     console.log("call getCurrentTimeFromUrl")
-
     return queryString("time", this.props.history.location.search);
   }
+  // next two methods to simulate the fading when skip video
+  removeAsyncClassName(item, className) {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(
+        item.classList.remove(className)
+      )
+        , 100)
+    })
+  }
+  addAsyncClassName(item, className) {
+    item.classList.add(className)
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(
+        item
+      )
+        , 100)
+    })
+  }
 
-  // set the current time of the video according to the time passed to this function
-  skipToTime(time) {
+  // set currentTime to the time passed to this function
+  async skipToTime(time) {
     console.log("call skipToTime")
     if (time === null) return;
+
+    const video = this.videoElement.current;
+    //wait for class applying
+    await this.addAsyncClassName(video, "video--fade-out")
+
     if (this.state.startingTime || time) {
       this.setState({
         currentTime: time,
@@ -91,6 +115,8 @@ class PlayerBody extends Component {
       })
     }
     this.videoElement.current.currentTime = time;
+    //wait for class removing
+    await this.removeAsyncClassName(video, "video--fade-out")
   }
   // set the the starting time in the state
   setStartingTime(time) {

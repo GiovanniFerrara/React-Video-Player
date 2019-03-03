@@ -37,7 +37,7 @@ const TimeLine = ({ currentTime, videoSrc, duration, skipToTime, handleTimeLineC
 export default TimeLine;
 
 TimeLine.propTypes = {
-  currentTime: PropTypes.number.isRequired,
+  currentTime: PropTypes.number,
   duration: PropTypes.number.isRequired,
   handleTimeLineClick: PropTypes.func.isRequired,
   hotSpots: PropTypes.array.isRequired,

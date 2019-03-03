@@ -30,8 +30,8 @@ const Screen = ({
   })
 
   const videoClassNames = classnames({
-    "player_screen": !isLoading && true,
-    "spinner__wrapper": isLoading && true
+    "player_screen": !isLoading,
+    "spinner__wrapper": isLoading
   })
 
   // Render the component 
