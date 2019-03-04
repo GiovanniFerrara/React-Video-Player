@@ -10,7 +10,7 @@ const CardItem = ({ note, time, duration, canvasRef }) => {
   const CardItemRef = useRef(null);
 
   let leftPosition = 100 * time / duration;
-  //dont position over 90% left
+  //dont position over 70% from left
   let borderBottomLeftRadius = 0;
 
   if (leftPosition > 70) {

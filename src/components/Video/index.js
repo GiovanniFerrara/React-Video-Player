@@ -5,7 +5,6 @@ const Video = ({ videoElement, videoSrc, videoClassNames, onLoadedData, getVideo
   return (
     <>
       <video
-        type="video/mp4"
         className={videoClassNames}
         onLoadedData={(e) => { onLoadedData(e.target) }}
         onTimeUpdate={(e) => { getVideoInfo(e.target) }}

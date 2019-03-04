@@ -37,8 +37,8 @@ class PlayerBody extends Component {
   }
   componentDidMount() {
     //reference the video
-    this.videoElement = React.createRef()
     console.log("componentDidMount")
+    this.videoElement = React.createRef()
     this.fetchVideo(videoID);
     this.getCurrentTimeFromUrl() && this.setStartingTime(this.getCurrentTimeFromUrl());
     // TODO fetch hotspots by the API
@@ -114,7 +114,7 @@ class PlayerBody extends Component {
         startingTime: 0,
       })
     }
-    this.videoElement.current.currentTime = time;
+    video.currentTime = time;
     //wait for class removing
     await this.removeAsyncClassName(video, "video--fade-out")
   }

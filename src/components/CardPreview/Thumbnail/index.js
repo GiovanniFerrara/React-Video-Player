@@ -1,4 +1,4 @@
-import React, { Component, useRef, useEffect } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import './style.sass'
 const Thumbnail = ({ canvasRef }) => {

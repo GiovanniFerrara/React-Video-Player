@@ -48,7 +48,11 @@ const Screen = ({
             getVideoInfo={getVideoInfo}
             videoElement={videoElement}
           />
-          <PlayButton handlePlayClick={handlePlayClick} isPlaying={isPlaying} videoElement={videoElement} />
+          <PlayButton
+            handlePlayClick={handlePlayClick}
+            isPlaying={isPlaying}
+            videoElement={videoElement}
+          />
           <div className="controls">
             <TimeLine
               currentTime={currentTime}
