@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './style.sass';
 import HotSpot from './HotSpot';
 import CardItem from './CardItem';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Video from '../Video';
 
 
@@ -10,7 +10,7 @@ import Video from '../Video';
 // and the note and an instance of the Video component, which is needed to have the possibility to extract the canvas at any time 
 // without mutating the the app state
 
-class CardPreview extends Component {
+class CardPreview extends PureComponent {
   constructor(props) {
     super(props)
     this.generateThumnail = this.generateThumnail.bind(this);

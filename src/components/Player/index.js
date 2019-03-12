@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.sass';
 import PlayButton from '../PlayButton';
+import TimeLine from './../TimeLine'
+import Video from '../Video'
 import classnames from 'classnames';
-import Spinner from '../../commons/Spinner'
-import TimeLine from './../../TimeLine'
-import Video from '../../Video'
+
 const Screen = ({
   videoSrc,
   isPlaying,
@@ -38,38 +38,33 @@ const Screen = ({
 
   return (
     <div className={videoWrapperClassNames}>
-      {!isLoading ? (
-        <>
-          <Video
-            handlePlayClick={handlePlayClick}
-            onLoadedData={onLoadedData}
-            videoClassNames={videoClassNames}
+      <>
+        <Video
+          handlePlayClick={handlePlayClick}
+          onLoadedData={onLoadedData}
+          videoClassNames={videoClassNames}
+          videoSrc={videoSrc}
+          getVideoInfo={getVideoInfo}
+          videoElement={videoElement}
+        />
+        <PlayButton
+          handlePlayClick={handlePlayClick}
+          isPlaying={isPlaying}
+          videoElement={videoElement}
+        />
+        <div className="controls">
+          <TimeLine
+            currentTime={currentTime}
+            duration={duration}
+            handleTimeLineClick={handleTimeLineClick}
+            hotSpots={hotSpots}
+            handleHotspotClick={handleHotspotClick}
+            videoElement={videoElement}
+            currentTime={currentTime}
             videoSrc={videoSrc}
-            getVideoInfo={getVideoInfo}
-            videoElement={videoElement}
           />
-          <PlayButton
-            handlePlayClick={handlePlayClick}
-            isPlaying={isPlaying}
-            videoElement={videoElement}
-          />
-          <div className="controls">
-            <TimeLine
-              currentTime={currentTime}
-              duration={duration}
-              handleTimeLineClick={handleTimeLineClick}
-              hotSpots={hotSpots}
-              handleHotspotClick={handleHotspotClick}
-              videoElement={videoElement}
-              currentTime={currentTime}
-              videoSrc={videoSrc}
-            />
-
-          </div>
-        </>
-      ) : (
-          <Spinner />
-        )
+        </div>
+      </>
       }
 
     </div>

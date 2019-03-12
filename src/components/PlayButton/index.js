@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import play from '../../../img/play.png'
-import pause from '../../../img/pause.png'
+import play from '../../img/play.png'
+import pause from '../../img/pause.png'
 import './style.sass'
 import classnames from 'classnames'
 

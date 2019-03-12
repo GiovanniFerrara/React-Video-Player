@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
-import Screen from './Screen'
+import React, { PureComponent } from 'react'
+import PlayerLoader from '../PlayerLoader'
 import hotSpots from '../../utils/seed/hotspots.json'
 import { _fetch } from '../../utils/mock/functions.js'
 import { queryString } from '../../utils/functions'
 import videoLocal from '../../utils/data/video.mp4'
+
 // seed SRC with a default link
 const videoID = videoLocal;
 
-class PlayerBody extends Component {
+class PlayerContainer extends PureComponent {
   constructor(props) {
     super(props)
     // APPLICATION STATE
@@ -182,7 +183,7 @@ class PlayerBody extends Component {
     return (
       <>
         <div className="container">
-          <Screen {...this.state}
+          <PlayerLoader {...this.state}
             handlePlayClick={this.handlePlayClick}
             getVideoInfo={this.getVideoInfo}
             onLoadedData={this.onLoadedData}
@@ -196,4 +197,4 @@ class PlayerBody extends Component {
   }
 }
 
-export default PlayerBody
+export default PlayerContainer
